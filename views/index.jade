@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1 Message Board
+  a(href="/new") New Message
+  div(id="message-cont")
+    script(type="text/javascript").
+      var listers = JSON.parse('!{list}');
+      console.log(listers)
+      for(i = 0; i < Object.keys(listers).length; i++)
+        if(listers[i].name != undefined && listers[i].message != undefined && listers[i].added != undefined && listers[i].user != "" && listers[i].text != "" ){
+          var newelem = document.createElement('h2')
+          newelem.innerText = 'User: ' + listers[i].name + ' --- Message:' + listers[i].message + ' --- ' + listers[i].added;
+          var cont = document.getElementById("message-cont");
+          cont.appendChild(newelem);
+        }
+        else{
+          continue;
+        }
